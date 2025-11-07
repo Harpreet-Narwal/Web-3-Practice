@@ -1,35 +1,35 @@
-// import * as ed from "@noble/ed25519"
+import * as ed from "@noble/ed25519"
 
-// async function main(){
+async function main(){
 
-//     const privateKey = ed.utils.randomSecretKey();
-//     console.log("Private Key : " + Buffer.from(privateKey).toString("hex"));
-//     let str = "hello world";
+    const privateKey = ed.utils.randomSecretKey();
+    console.log("Private Key : " + Buffer.from(privateKey).toString("hex"));
+    let str = "hello world";
 
-//     const message = new TextEncoder().encode(str);
-//     console.log("--------------------------------")
-//     // console.log("Message: " + Buffer.from(message).toString("base64"));
+    const message = new TextEncoder().encode(str);
+    console.log("--------------------------------")
+    // console.log("Message: " + Buffer.from(message).toString("base64"));
 
 
-//     const pubKey = await ed.getPublicKeyAsync(privateKey);
-//     console.log("--------------------------------")
-//     console.log("Public Key : "  + pubKey);
+    const pubKey = await ed.getPublicKeyAsync(privateKey);
+    console.log("--------------------------------")
+    console.log("Public Key : "  + pubKey);
 
-//     const signature = await ed.signAsync(message, privateKey);
-//     console.log("--------------------------------")
-//     console.log("Signature: " + signature);
+    const signature = await ed.signAsync(message, privateKey);
+    console.log("--------------------------------")
+    console.log("Signature: " + signature);
 
-//     const isValid = await ed.verifyAsync(signature, message, pubKey);
+    const isValid = await ed.verifyAsync(signature, message, pubKey);
     
-//     console.log("--------------------------------")
-//     console.log("isValid: " + isValid);
+    console.log("--------------------------------")
+    console.log("isValid: " + isValid);
 
-//     const decodedMessage = new TextDecoder().decode(message);
-//     console.log(decodedMessage);
+    const decodedMessage = new TextDecoder().decode(message);
+    console.log(decodedMessage);
 
-// }
+}
 
-// main();
+main();
 
 
 // USING Solana lib:
