@@ -7,8 +7,11 @@ import {
     WalletDisconnectButton,
     WalletMultiButton
 } from '@solana/wallet-adapter-react-ui';
-import { clusterApiUrl } from '@solana/web3.js';
+import { clusterApiUrl, PublicKey, SystemProgram, Transaction , LAMPORTS_PER_SOL} from '@solana/web3.js';
 import '@solana/wallet-adapter-react-ui/styles.css';
+import { ed25519 } from '@noble/curves/ed25519'
+import bs58 from 'bs58';
+
 import { useState } from 'react'
 
 
@@ -45,6 +48,7 @@ function App() {
           <WalletModalProvider>
             <Topbar />
             <Portfolio />
+            <Send/>
             {/* App's components go here, nested within the context providers */}
           </WalletModalProvider>
         </WalletProvider>
@@ -52,6 +56,56 @@ function App() {
 
       </>
   )
+}
+
+function Send(){
+
+  const {publicKey, sendTransaction} = useWallet();
+  const {connection} = useConnection();
+
+
+  return <>
+    <input id='address' type='text' placeholder='Wallet Address' />
+    <input id='amount' type='text' placeholder='Amount'/>
+    <button onClick={async () =>{ 
+
+      const addressvalue = (document.getElementById("adddress") as HTMLElement).value;
+      const amountValue = (document.getElementById("amount") as HTMLElement).value;
+
+      const trasaction  = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: publicKey!,
+          toPubkey: new PublicKey(addressvalue),
+          lamports: amountValue * LAMPORTS_PER_SOL
+        })
+      )
+      await sendTransaction(trasaction, connection)
+    }}>Send SOL</button>
+  </>
+}
+
+
+function SignMessage(){
+  const { publicKey, signMessage } = useWallet();
+
+
+  async function onClick(){
+    if(!publicKey) throw new Error('Wallet not connected!');
+    if(!signMessage) throw new Error('Wallet does not support message signin!');
+
+    const message = (document.getElementById("message") as HTMLElement).value;
+    const encodedMessage = new TextEncoder().encode(message);
+    const signature = await signMessage(encodedMessage);
+
+    if(!ed25519.verify(signature, encodedMessage, publicKey.toBytes())) throw new Error('Message signature invalid')
+
+    alert('success', `Message signature: ${bs58.encode(signature)}`);
+  }
+
+  return <div>
+    <input id='message' type='text' placeholder='Message'></input>
+    <button onClick={onClick}>Sign Message</button>
+  </div>
 }
 
 function Topbar(){
@@ -78,9 +132,9 @@ function Portfolio(){
   }, [publicKey])  
 
   return <div>
-    {publicKey?.toString()}
-    <br></br>
-    SOL Balance: {balance !== null ? balance / 1000_000_000 : 'Loading...'}
+    Address - {publicKey?.toString()}
+    <br/>
+    SOL Balance - {balance !== null ? balance / 1000_000_000 : 'Loading...'}
   </div>
 
 }
