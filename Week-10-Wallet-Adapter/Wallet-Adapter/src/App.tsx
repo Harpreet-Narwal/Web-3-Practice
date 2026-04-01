@@ -49,6 +49,8 @@ function App() {
             <Topbar />
             <Portfolio />
             <Send/>
+            <br/>
+            <SignMessage />
             {/* App's components go here, nested within the context providers */}
           </WalletModalProvider>
         </WalletProvider>
