@@ -14,7 +14,7 @@ import bs58 from 'bs58';
 
 import { useState } from 'react'
 
-
+ 
 
 function App() {
   const endpoint = "https://mainnet.helius-rpc.com/?api-key=b04d7878-63a6-45a2-bfe5-9c7fcd38c539" // slight security issues
@@ -69,8 +69,8 @@ function Send(){
   return <>
     <input id='address' type='text' placeholder='Wallet Address' />
     <input id='amount' type='text' placeholder='Amount'/>
+    
     <button onClick={async () =>{ 
-
       const addressvalue = (document.getElementById("adddress") as HTMLElement).value;
       const amountValue = (document.getElementById("amount") as HTMLElement).value;
 
@@ -81,7 +81,9 @@ function Send(){
           lamports: amountValue * LAMPORTS_PER_SOL
         })
       )
+      
       await sendTransaction(trasaction, connection)
+      alert("Sent " + amountValue + " SOL to " + addressvalue);
     }}>Send SOL</button>
   </>
 }
