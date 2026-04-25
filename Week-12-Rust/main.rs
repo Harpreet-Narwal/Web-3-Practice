@@ -55,16 +55,72 @@
 //     println!("{}", do_sum(1, 2));
 // }
 
+// fn main(){
+//     let mut str : String = String::from("Harpreet");
+//     let len: usize = get_length(&mut str);
+
+//     println!("{} {}", str, len);
+
+//     println!("{}", str);
+// }
+
+// fn get_length(str : &mut String) -> usize{
+//     str.push_str(&String::from("  harkirat"));
+//     return str.len();
+// }
+
+
+
+// fn main(){
+//     let x = 1;
+//     // x = "harkirat";
+//     println!("Output: {}", x);
+//     print!("Hello World");
+// }
+
+// fn main(){
+//     let mut x : u32 = 100000;
+//     x += 123;
+//     println!("{}", x);
+
+// }
+
+
 fn main(){
-    let mut str : String = String::from("Harpreet");
-    let len: usize = get_length(&mut str);
+    // let sentence = String::from("my name is harkirat");
+    // let first_word = get_first_word(sentence);
+    // print!("First Word is {}", first_word);
 
-    println!("{} {}", str, len);
+    // let n = 10;
+    // for _i in 0..n{
+    //     println!("Hello World");
+    // }
+    // print!("First Word is: {}", first_word);
 
-    println!("{}", str);
+
+    update_string();
 }
 
-fn get_length(str : &mut String) -> usize{
-    str.push_str(&String::from("  harkirat"));
-    return str.len();
+// fn get_first_word(sentence: String) -> String{
+//     let mut ans = String::from("");
+//     for char in sentence.chars(){
+//         ans.push(char);
+//         if char == ' ' {
+//             break;
+//         }
+//     }
+
+//     return ans;
+// }
+
+fn update_string(){
+    let mut s = String::from("Initial String");
+    println!("Before Update: {}", s);
+    println!("Capacity: {}, Length: {}, pointer: {:p}", s.capacity(), s.len(), s.as_ptr());
+
+    for _ in 0..100{
+        s.push_str(" and some additional text");
+        println!("Capacity: {}, Length: {}, pointer: {:p}", s.capacity(), s.len(), s.as_ptr());
+    }
 }
+

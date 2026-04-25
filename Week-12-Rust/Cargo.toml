@@ -1,0 +1,10 @@
+[package]
+name = "Week-12-Rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[[bin]]
+name = "Week-12-Rust"
+path = "main.rs"
