@@ -86,20 +86,20 @@
 // }
 
 
-fn main(){
-    // let sentence = String::from("my name is harkirat");
-    // let first_word = get_first_word(sentence);
-    // print!("First Word is {}", first_word);
+// fn main(){
+//     // let sentence = String::from("my name is harkirat");
+//     // let first_word = get_first_word(sentence);
+//     // print!("First Word is {}", first_word);
 
-    // let n = 10;
-    // for _i in 0..n{
-    //     println!("Hello World");
-    // }
-    // print!("First Word is: {}", first_word);
+//     // let n = 10;
+//     // for _i in 0..n{
+//     //     println!("Hello World");
+//     // }
+//     // print!("First Word is: {}", first_word);
 
 
-    update_string();
-}
+//     update_string();
+// }
 
 // fn get_first_word(sentence: String) -> String{
 //     let mut ans = String::from("");
@@ -113,14 +113,90 @@ fn main(){
 //     return ans;
 // }
 
-fn update_string(){
-    let mut s = String::from("Initial String");
-    println!("Before Update: {}", s);
-    println!("Capacity: {}, Length: {}, pointer: {:p}", s.capacity(), s.len(), s.as_ptr());
+// fn update_string(){
+//     let mut s = String::from("Initial String");
+//     println!("Before Update: {}", s);
+//     println!("Capacity: {}, Length: {}, pointer: {:p}", s.capacity(), s.len(), s.as_ptr());
 
-    for _ in 0..100{
-        s.push_str(" and some additional text");
-        println!("Capacity: {}, Length: {}, pointer: {:p}", s.capacity(), s.len(), s.as_ptr());
+//     for _ in 0..100{
+//         s.push_str(" and some additional text");
+//         println!("Capacity: {}, Length: {}, pointer: {:p}", s.capacity(), s.len(), s.as_ptr());
+//     }
+// }
+
+
+// fn main(){
+//     let s: String = String::from("Harkirat");
+//     println!("{}", is_longer_than(&s, 1));
+//     println!("{}", s);
+// }
+
+// fn is_longer_than(s: &String, num: usize) -> bool {
+//     if s.len() > num{
+//         return true;
+//     }
+//     else{
+//         return false;
+//     }
+// }
+#[derive(Debug)]
+struct Address {
+    city: String,
+    pincode: usize,
+    country: String
+
+}
+#[derive(Debug)]
+struct User {
+    name: String,
+    age: u32,
+    addresses: Vec<Address>,
+}
+
+// self -> non static fn, no self in fn parameter -> static
+
+impl User {
+    fn is_allowed_to_vote(&self, legal_age: u32) -> bool{
+        if self.age >= legal_age{
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    fn who_am_i() -> String{
+        return String::from("User struct");
     }
 }
+
+fn main(){
+    let user1 = User{
+        name: String::from("Harkirat"),
+        age: 18,
+        addresses: vec![Address {city: String::from("Chandigarh"), pincode: 123123, country: String::from("India")}]
+    };
+
+    let user2 = User{
+        name: String::from("Raman"),
+        age: 13,
+        addresses: vec![Address {city: String::from("Chandigarh"), pincode: 123123, country: String::from("India")}]
+    };
+
+    println!("{}", user1.is_allowed_to_vote(18));
+    println!("{}", user2.is_allowed_to_vote(32));
+
+    println!("{}", User::who_am_i());
+
+    // print!("{:?}", user1.addresses);
+}
+
+
+// fn is_allowed_to_vote(u: &User) -> bool{
+//     if u.age >= 18{
+//         return true;
+//     }else{
+//         return false;
+//     }
+// }
+
 
