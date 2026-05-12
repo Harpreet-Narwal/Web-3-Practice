@@ -396,6 +396,60 @@
 
 // DECORATORS and ANNOTATION
 
+// <Metaprogramming: 
+
+
+// macro_rules! say_hello {
+//     ($arg: expr) => {
+//         println!("Hello world, {} ", $arg);
+//     };
+// }
+
+
+// fn main(){
+//     let a: u32 = 1;
+//     println!("{}", a);
+
+//     say_hello!("abc");
+// }
+
+use std::fmt::{Display, write};
+
+
+struct Rect{
+    width: u32,
+    height: u32
+}
+
+impl Display for Rect{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Rectangle has a width of {}, and height of {}\n",self.width, self.height)
+    }
+}
+
 fn main(){
-    
+    // let r : Rect = Rect { 
+    //     width: 32,
+    //     height: 32
+    // };
+
+    // print!("{}", r);
+
+    // CLONE -> expensive operation use clone not copy...
+    let x = String::from("Hi");
+    let y = String::from("Hello there");
+
+    let x1 = x.clone();
+    let y1 = y.clone();
+
+    // COPY
+    let i = 1;
+    let j = 2;
+    let i1 = i;
+    let j1 = j;
+
+    println!("{}, {}, {}, {}", x, y, x1, y1);
+    println!("{}, {}, {}, {}", i,j, i1, j1);
+
+
 }
